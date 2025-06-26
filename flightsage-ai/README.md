@@ -1,0 +1,3 @@
+# ✈️ FlightSage AI
+
+FlightSage is your personal AI travel assistant...
