@@ -1,3 +1,4 @@
+✅ **This is the active / canonical FlightSage repo. All new work will be done here.**
 # ✈️ FlightSage AI
 
 Welcome to **FlightSage**, your AI-powered travel assistant that helps you find the best flight deals in real-time using smart APIs and GPT-enhanced search summaries.
