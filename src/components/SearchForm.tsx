@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import { Plane, Hotel, Car, Users, Calendar, MapPin, Search, Plus, Minus } from 'lucide-react'
+import { Plane, Hotel, Car, TreePine, Users, Calendar, MapPin, Search, Plus, Minus } from 'lucide-react'
 
 interface SearchFormProps {
-  activeTab: 'flights' | 'hotels' | 'cars'
-  setActiveTab: (tab: 'flights' | 'hotels' | 'cars') => void
+  activeTab: 'flights' | 'hotels' | 'cars' | 'attractions'
+  setActiveTab: (tab: 'flights' | 'hotels' | 'cars' | 'attractions') => void
   onSearch: (data: any) => void
 }
 
@@ -29,7 +29,8 @@ const SearchForm: React.FC<SearchFormProps> = ({ activeTab, setActiveTab, onSear
   const tabs = [
     { id: 'flights', label: 'Flights', icon: Plane },
     { id: 'hotels', label: 'Hotels', icon: Hotel },
-    { id: 'cars', label: 'Rental Cars', icon: Car }
+    { id: 'cars', label: 'Rental Cars', icon: Car },
+    { id: 'attractions', label: 'Attractions', icon: TreePine }
   ]
 
   return (
@@ -87,13 +88,17 @@ const SearchForm: React.FC<SearchFormProps> = ({ activeTab, setActiveTab, onSear
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
           <div className="space-y-2">
             <label className="block text-sm font-medium text-gray-700">
-              {activeTab === 'flights' ? 'From' : activeTab === 'hotels' ? 'Destination' : 'Pickup Location'}
+              {activeTab === 'flights' ? 'From' : 
+               activeTab === 'hotels' ? 'Destination' : 
+               activeTab === 'cars' ? 'Pickup Location' : 'Location'}
             </label>
             <div className="relative">
               <MapPin className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
               <input
                 type="text"
-                placeholder={activeTab === 'flights' ? 'New York (JFK)' : activeTab === 'hotels' ? 'Los Angeles, CA' : 'Los Angeles Airport'}
+                placeholder={activeTab === 'flights' ? 'New York (JFK)' : 
+                           activeTab === 'hotels' ? 'Los Angeles, CA' : 
+                           activeTab === 'cars' ? 'Los Angeles Airport' : 'Yellowstone, WY'}
                 className="input-field pl-10"
                 value={formData.from}
                 onChange={(e) => setFormData({...formData, from: e.target.value})}
@@ -119,7 +124,9 @@ const SearchForm: React.FC<SearchFormProps> = ({ activeTab, setActiveTab, onSear
 
           <div className="space-y-2">
             <label className="block text-sm font-medium text-gray-700">
-              {activeTab === 'flights' ? 'Departure' : activeTab === 'hotels' ? 'Check-in' : 'Pickup Date'}
+              {activeTab === 'flights' ? 'Departure' : 
+               activeTab === 'hotels' ? 'Check-in' : 
+               activeTab === 'cars' ? 'Pickup Date' : 'Visit Date'}
             </label>
             <div className="relative">
               <Calendar className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
@@ -134,7 +141,9 @@ const SearchForm: React.FC<SearchFormProps> = ({ activeTab, setActiveTab, onSear
 
           <div className="space-y-2">
             <label className="block text-sm font-medium text-gray-700">
-              {activeTab === 'flights' ? 'Return' : activeTab === 'hotels' ? 'Check-out' : 'Return Date'}
+              {activeTab === 'flights' ? 'Return' : 
+               activeTab === 'hotels' ? 'Check-out' : 
+               activeTab === 'cars' ? 'Return Date' : 'End Date'}
             </label>
             <div className="relative">
               <Calendar className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
@@ -149,8 +158,10 @@ const SearchForm: React.FC<SearchFormProps> = ({ activeTab, setActiveTab, onSear
         </div>
 
         {/* Additional Options for Hotels */}
-        {activeTab === 'hotels' && (
+        {(activeTab === 'hotels' || activeTab === 'attractions') && (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+            {activeTab === 'hotels' && (
+              <>
             <div className="space-y-2">
               <label className="block text-sm font-medium text-gray-700">Rooms</label>
               <select 
@@ -187,6 +198,41 @@ const SearchForm: React.FC<SearchFormProps> = ({ activeTab, setActiveTab, onSear
                 ))}
               </select>
             </div>
+              </>
+            )}
+            {activeTab === 'attractions' && (
+              <>
+                <div className="space-y-2">
+                  <label className="block text-sm font-medium text-gray-700">Activity Type</label>
+                  <select className="input-field">
+                    <option>All Attractions</option>
+                    <option>National Parks</option>
+                    <option>State Parks</option>
+                    <option>Museums</option>
+                    <option>Adventure Tours</option>
+                    <option>Cultural Sites</option>
+                  </select>
+                </div>
+                <div className="space-y-2">
+                  <label className="block text-sm font-medium text-gray-700">Duration</label>
+                  <select className="input-field">
+                    <option>Any Duration</option>
+                    <option>Half Day (2-4 hours)</option>
+                    <option>Full Day (6-8 hours)</option>
+                    <option>Multi-Day</option>
+                  </select>
+                </div>
+                <div className="space-y-2">
+                  <label className="block text-sm font-medium text-gray-700">Difficulty</label>
+                  <select className="input-field">
+                    <option>All Levels</option>
+                    <option>Easy</option>
+                    <option>Moderate</option>
+                    <option>Challenging</option>
+                  </select>
+                </div>
+              </>
+            )}
           </div>
         )}
 

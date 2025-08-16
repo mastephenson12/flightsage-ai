@@ -1,5 +1,5 @@
 import React from 'react'
-import { Star, Clock, Users, Wifi, Car, MapPin, Plane } from 'lucide-react'
+import { Star, Clock, Users, Wifi, Car, MapPin, Plane, TreePine, Camera, Compass } from 'lucide-react'
 
 interface BookingResultsProps {
   results: {
@@ -191,6 +191,81 @@ const BookingResults: React.FC<BookingResultsProps> = ({ results }) => {
     </div>
   )
 
+  const renderAttractionResult = (attraction: any) => (
+    <div key={attraction.id} className="card mb-4 hover:shadow-xl transition-shadow">
+      <div className="flex">
+        <div className="w-48 h-48">
+          <img 
+            src={attraction.image} 
+            alt={attraction.name}
+            className="w-full h-full object-cover"
+          />
+        </div>
+        <div className="flex-1 p-6">
+          <div className="flex justify-between items-start mb-4">
+            <div>
+              <div className="flex items-center mb-2">
+                <TreePine className="w-5 h-5 text-green-600 mr-2" />
+                <span className="text-sm font-medium text-green-600 bg-green-100 px-2 py-1 rounded-full">
+                  {attraction.type}
+                </span>
+              </div>
+              <h3 className="text-xl font-bold mb-2">{attraction.name}</h3>
+              <div className="flex items-center mb-2">
+                <div className="flex items-center mr-4">
+                  {[...Array(5)].map((_, i) => (
+                    <Star 
+                      key={i} 
+                      className={`w-4 h-4 ${i < Math.floor(attraction.rating) ? 'text-yellow-400 fill-current' : 'text-gray-300'}`} 
+                    />
+                  ))}
+                  <span className="ml-2 text-sm text-gray-600">{attraction.rating}</span>
+                </div>
+                <div className="flex items-center text-gray-600">
+                  <Clock className="w-4 h-4 mr-1" />
+                  {attraction.duration}
+                </div>
+              </div>
+              <div className="flex items-center text-gray-600 mb-4">
+                <MapPin className="w-4 h-4 mr-1" />
+                {attraction.location}
+              </div>
+              <p className="text-gray-700 mb-4">{attraction.description}</p>
+            </div>
+            <div className="text-right">
+              <div className="text-2xl font-bold text-green-600">
+                ${attraction.price - (attraction.price * attraction.groupDiscount / 100)}
+                <span className="text-sm text-gray-500 line-through ml-2">${attraction.price}</span>
+              </div>
+              <div className="text-sm text-green-600 font-medium">
+                {attraction.groupDiscount}% Group Discount
+              </div>
+              <div className="text-xs text-gray-500">per person</div>
+            </div>
+          </div>
+          
+          <div className="flex flex-wrap gap-2 mb-4">
+            {attraction.features.map((feature: string, index: number) => (
+              <span key={index} className="px-3 py-1 bg-green-100 text-green-800 text-sm rounded-full">
+                {feature}
+              </span>
+            ))}
+          </div>
+          
+          <div className="flex justify-between items-center">
+            <div className="text-sm text-gray-600">
+              <Users className="w-4 h-4 inline mr-1" />
+              Perfect for groups of {attraction.groupSize}
+            </div>
+            <button className="btn-primary">
+              Book Experience
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+
   return (
     <div className="animate-fade-in">
       <div className="flex items-center justify-between mb-6">
@@ -212,6 +287,7 @@ const BookingResults: React.FC<BookingResultsProps> = ({ results }) => {
           if (type === 'flights') return renderFlightResult(item)
           if (type === 'hotels') return renderHotelResult(item)
           if (type === 'cars') return renderCarResult(item)
+          if (type === 'attractions') return renderAttractionResult(item)
           return null
         })}
       </div>

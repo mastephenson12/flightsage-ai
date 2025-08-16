@@ -1,5 +1,5 @@
 import React from 'react'
-import { Users, DollarSign, Calendar, Headphones, Shield, Award } from 'lucide-react'
+import { Users, DollarSign, Calendar, Headphones, Shield, Award, TreePine, Camera } from 'lucide-react'
 
 const GroupFeatures = () => {
   const features = [
@@ -44,6 +44,20 @@ const GroupFeatures = () => {
       description: 'Priority check-in, seat selection, and exclusive group amenities',
       color: 'text-indigo-600',
       bgColor: 'bg-indigo-100'
+    },
+    {
+      icon: TreePine,
+      title: 'Complete Experiences',
+      description: 'Book attractions, national parks, and activities alongside your travel',
+      color: 'text-green-600',
+      bgColor: 'bg-green-100'
+    },
+    {
+      icon: Camera,
+      title: 'Curated Adventures',
+      description: 'Discover hidden gems and must-see attractions with local expert recommendations',
+      color: 'text-pink-600',
+      bgColor: 'bg-pink-100'
     }
   ]
 
@@ -60,21 +74,21 @@ const GroupFeatures = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {features.map((feature, index) => {
             const Icon = feature.icon
             return (
               <div 
                 key={index} 
-                className="card p-8 text-center hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
+                className="card p-6 text-center hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
               >
-                <div className={`w-16 h-16 ${feature.bgColor} rounded-full flex items-center justify-center mx-auto mb-6`}>
-                  <Icon className={`w-8 h-8 ${feature.color}`} />
+                <div className={`w-12 h-12 ${feature.bgColor} rounded-full flex items-center justify-center mx-auto mb-4`}>
+                  <Icon className={`w-6 h-6 ${feature.color}`} />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-4">
+                <h3 className="text-lg font-bold text-gray-900 mb-3">
                   {feature.title}
                 </h3>
-                <p className="text-gray-600 leading-relaxed">
+                <p className="text-gray-600 leading-relaxed text-sm">
                   {feature.description}
                 </p>
               </div>

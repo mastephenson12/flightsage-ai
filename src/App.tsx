@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Plane, Hotel, Car, Users, Calendar, MapPin, Search, Star, Clock, Shield } from 'lucide-react'
+import { Plane, Hotel, Car, Users, Calendar, MapPin, Search, Star, Clock, Shield, TreePine } from 'lucide-react'
 import SearchForm from './components/SearchForm'
 import GroupFeatures from './components/GroupFeatures'
 import BookingResults from './components/BookingResults'
@@ -7,7 +7,7 @@ import Header from './components/Header'
 
 function App() {
   const [searchResults, setSearchResults] = useState(null)
-  const [activeTab, setActiveTab] = useState<'flights' | 'hotels' | 'cars'>('flights')
+  const [activeTab, setActiveTab] = useState<'flights' | 'hotels' | 'cars' | 'attractions'>('flights')
 
   const handleSearch = (searchData: any) => {
     // Simulate API call
@@ -70,7 +70,7 @@ function App() {
           image: 'https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg'
         }
       ]
-    } else {
+    } else if (type === 'cars') {
       return [
         {
           id: 1,
@@ -91,6 +91,65 @@ function App() {
           groupDiscount: 25,
           features: ['4WD', 'GPS', 'Premium Audio'],
           availability: 3
+        }
+      ]
+    } else {
+      return [
+        {
+          id: 1,
+          name: 'Yellowstone National Park',
+          type: 'National Park',
+          location: 'Wyoming, USA',
+          price: 35,
+          groupDiscount: 20,
+          duration: 'Full Day',
+          rating: 4.9,
+          description: 'Experience geysers, hot springs, and incredible wildlife',
+          features: ['Guided Tours', 'Wildlife Viewing', 'Photography', 'Hiking Trails'],
+          groupSize: '15+ people',
+          image: 'https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg'
+        },
+        {
+          id: 2,
+          name: 'Grand Canyon Skywalk',
+          type: 'Attraction',
+          location: 'Arizona, USA',
+          price: 89,
+          groupDiscount: 25,
+          duration: '4 hours',
+          rating: 4.7,
+          description: 'Walk on glass 4,000 feet above the Colorado River',
+          features: ['Glass Bridge', 'Scenic Views', 'Photo Opportunities', 'Gift Shop'],
+          groupSize: '10+ people',
+          image: 'https://images.pexels.com/photos/1562/italian-landscape-mountains-nature.jpg'
+        },
+        {
+          id: 3,
+          name: 'Redwood State Park Adventure',
+          type: 'State Park',
+          location: 'California, USA',
+          price: 45,
+          groupDiscount: 30,
+          duration: '6 hours',
+          rating: 4.8,
+          description: 'Explore the tallest trees on Earth with guided nature walks',
+          features: ['Giant Trees', 'Nature Walks', 'Educational Tours', 'Picnic Areas'],
+          groupSize: '12+ people',
+          image: 'https://images.pexels.com/photos/167699/pexels-photo-167699.jpeg'
+        },
+        {
+          id: 4,
+          name: 'Niagara Falls Boat Tour',
+          type: 'Attraction',
+          location: 'New York, USA',
+          price: 65,
+          groupDiscount: 20,
+          duration: '3 hours',
+          rating: 4.6,
+          description: 'Get up close to the thundering waterfalls on the Maid of the Mist',
+          features: ['Boat Tour', 'Waterfall Views', 'Raincoats Provided', 'Photo Stops'],
+          groupSize: '8+ people',
+          image: 'https://images.pexels.com/photos/1770809/pexels-photo-1770809.jpeg'
         }
       ]
     }
