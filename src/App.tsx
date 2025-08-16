@@ -168,8 +168,8 @@ function App() {
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600"> Simple</span>
             </h1>
             <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-              Book flights, hotels, and rental cars for your entire group with exclusive discounts, 
-              coordinated itineraries, and seamless group management.
+              Book flights, hotels, rental cars, and amazing attractions for your entire group with exclusive discounts, 
+              coordinated itineraries, and seamless group management. From national parks to cultural sites.
             </p>
           </div>
           
