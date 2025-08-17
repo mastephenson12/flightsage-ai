@@ -1,0 +1,2 @@
+﻿/* keep global CSS simple to avoid hydration mismatches */
+body { font-family: system-ui, sans-serif; }
